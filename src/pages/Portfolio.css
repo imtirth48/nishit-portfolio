@@ -103,4 +103,18 @@
     .case-study-card {
         grid-template-columns: 1fr;
     }
+
+    .case-study-card .case-visual {
+        height: 250px;
+        order: -1;
+        /* Image on top for mobile */
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-subtitle {
+        font-size: 1.5rem;
+    }
 }

@@ -23,7 +23,7 @@ const Home = () => {
             </div>
           </div>
           <div className="hero-visual">
-             <div className="scene-wrapper" style={{ width: '100%', height: '500px' }}>
+             <div className="scene-wrapper">
               <Scene />
             </div>
           </div>

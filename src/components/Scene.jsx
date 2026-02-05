@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Sphere, MeshDistortMaterial, Environment } from '@react-three/drei';
+import { Html, useProgress, OrbitControls, Sphere, MeshDistortMaterial, Environment } from '@react-three/drei';
 
 const AnimatedSphere = () => {
   const sphereRef = useRef();
@@ -14,9 +14,9 @@ const AnimatedSphere = () => {
   });
 
   return (
-    <Sphere ref={sphereRef} args={[1, 100, 200]} scale={2}>
+    <Sphere visible args={[0.7, 100, 200]} ref={sphereRef} scale={2}>
       <MeshDistortMaterial
-        color="#00b4d8"
+        color="#466c6b"
         attach="material"
         distort={0.4} // Strength, 0 disables the effect (default=1)
         speed={1.5} // Speed (default=1)
@@ -27,14 +27,25 @@ const AnimatedSphere = () => {
   );
 };
 
+const Loader = () => {
+  const { progress } = useProgress();
+  return <Html center>{progress.toFixed(1)} % loaded</Html>;
+};
+
 const Scene = () => {
   return (
-    <Canvas className="canvas-container" camera={{ position: [0, 0, 5] }}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <AnimatedSphere />
-      <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-      <Environment preset="city" />
+    <Canvas 
+      className="canvas-container" 
+      camera={{ position: [0, 0, 5] }}
+      style={{ width: '100%', height: '100%', minHeight: '300px' }}
+    >
+      <Suspense fallback={<Loader />}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <AnimatedSphere />
+        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
+        <Environment preset="city" />
+      </Suspense>
     </Canvas>
   );
 };
