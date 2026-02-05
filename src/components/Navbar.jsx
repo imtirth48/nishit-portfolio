@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Activity } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -26,9 +26,8 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar-container">
-        <Link to="/" className="logo">
-          <Activity size={32} className="logo-icon" />
-          <span className="logo-text">PhysioCare</span>
+        <Link to="/" className="logo-link">
+          <img src={logoImg} alt="PhysioCare Logo" className="logo-img" />
         </Link>
         
         <div className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
